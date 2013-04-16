@@ -271,8 +271,6 @@ class Chef
         @node.chef_environment(Chef::Config[:environment])
       end
 
-      puts "******* AFTER build_node " + @node.chef_environment
-
       # consume_external_attrs may add items to the run_list. Save the
       # expanded run_list, which we will pass to the server later to
       # determine which versions of cookbooks to use.
