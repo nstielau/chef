@@ -279,6 +279,11 @@ class Chef
       Chef::Log.debug("Applying attributes from json file")
       self.normal_attrs = Chef::Mixin::DeepMerge.merge(normal_attrs,normal_attrs_to_merge)
       self.tags # make sure they're defined
+
+      if attrs.key?("chef_environment")
+        Chef::Log.info("Applying chef_environment " + attrs["chef_environment"])
+        self.chef_environment(attrs["chef_environment"])
+      end
     end
 
     # Lazy initializer for tags attribute
@@ -412,6 +417,7 @@ class Chef
       node = new
       node.name(o["name"])
       node.chef_environment(o["chef_environment"])
+
       if o.has_key?("attributes")
         node.normal_attrs = o["attributes"]
       end
